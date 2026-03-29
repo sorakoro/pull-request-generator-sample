@@ -7,7 +7,7 @@ spec:
   generators:
     - pullRequest:
         github:
-          owner: GITHUB_USER
+          owner: sorakoro
           repo: pr-preview
           tokenRef:
             secretName: github-token
@@ -23,7 +23,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: "https://github.com/GITHUB_USER/pr-preview.git"
+        repoURL: "https://github.com/sorakoro/pr-preview.git"
         targetRevision: "{{head_sha}}"
         path: k8s/overlays/pr-preview
       destination:
