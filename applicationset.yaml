@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: myapp-pr-preview
+  namespace: argocd
+spec:
+  generators:
+    - pullRequest:
+        github:
+          owner: GITHUB_USER
+          repo: pr-preview
+          tokenRef:
+            secretName: github-token
+            key: token
+          labels:
+            - preview
+        requeueAfterSeconds: 30
+  template:
+    metadata:
+      name: "myapp-pr-{{number}}"
+      labels:
+        app.kubernetes.io/managed-by: applicationset
+    spec:
+      project: default
+      source:
+        repoURL: "https://github.com/GITHUB_USER/pr-preview.git"
+        targetRevision: "{{head_sha}}"
+        path: k8s/overlays/pr-preview
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: "pr-{{number}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
