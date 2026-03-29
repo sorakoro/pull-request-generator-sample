@@ -32,9 +32,22 @@ spec:
                 kind: Ingress
                 name: myapp
               patch: |
-                - op: replace
-                  path: /spec/rules/0/host
-                  value: pr-{{number}}.localhost
+                apiVersion: networking.k8s.io/v1
+                kind: Ingress
+                metadata:
+                  name: myapp
+                spec:
+                  rules:
+                    - host: pr-{{number}}.localhost
+                      http:
+                        paths:
+                          - path: /
+                            pathType: Prefix
+                            backend:
+                              service:
+                                name: myapp
+                                port:
+                                  number: 80
       destination:
         server: https://kubernetes.default.svc
         namespace: "pr-{{number}}"
