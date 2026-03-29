@@ -26,6 +26,15 @@ spec:
         repoURL: "https://github.com/sorakoro/pr-preview.git"
         targetRevision: "{{head_sha}}"
         path: k8s/overlays/pr-preview
+        kustomize:
+          patches:
+            - target:
+                kind: Ingress
+                name: myapp
+              patch: |
+                - op: replace
+                  path: /spec/rules/0/host
+                  value: pr-{{number}}.localhost
       destination:
         server: https://kubernetes.default.svc
         namespace: "pr-{{number}}"
