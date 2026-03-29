@@ -20,7 +20,7 @@ spec:
             - configMapRef:
                 name: myapp-config
           ports:
-            - containerPort: 8080
+            - containerPort: 80
           resources:
             requests:
               cpu: 100m
