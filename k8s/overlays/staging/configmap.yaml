@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: myapp-config
 data:
-  APP_ENV: "staging"
+  APP_ENV: "pr-8-test"
