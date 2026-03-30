@@ -16,6 +16,9 @@ spec:
         - name: myapp
           image: myapp:latest
           imagePullPolicy: Never
+          envFrom:
+            - configMapRef:
+                name: myapp-config
           ports:
             - containerPort: 80
           resources:
