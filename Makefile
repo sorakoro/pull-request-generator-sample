@@ -1,6 +1,6 @@
 CLUSTER_NAME := pull-request-generator-sample
 
-.PHONY: cluster-create cluster-delete ingress-install argocd-install argocd-setup argocd-password argocd-port-forward
+.PHONY: cluster-create cluster-delete ingress-install argocd-install argocd-setup argocd-password argocd-port-forward image-build image-load
 
 cluster-create:
 	kind create cluster --name $(CLUSTER_NAME) --config kind-config.yaml
@@ -29,6 +29,12 @@ argocd-password:
 
 argocd-port-forward:
 	kubectl port-forward svc/argocd-server -n argocd 8080:443
+
+image-build:
+	docker build -t myapp:latest ./app
+
+image-load:
+	kind load docker-image myapp:latest --name $(CLUSTER_NAME)
 
 cluster-delete:
 	kind delete cluster --name $(CLUSTER_NAME)
