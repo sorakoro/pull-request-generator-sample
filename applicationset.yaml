@@ -25,7 +25,7 @@ spec:
       source:
         repoURL: "https://github.com/sorakoro/pull-request-generator-sample.git"
         targetRevision: "{{head_sha}}"
-        path: k8s/overlays/pr-preview
+        path: k8s/overlays/staging
         kustomize:
           patches:
             - target:
