@@ -8,7 +8,7 @@ spec:
     - pullRequest:
         github:
           owner: sorakoro
-          repo: pr-preview
+          repo: pull-request-generator-sample
           tokenRef:
             secretName: github-token
             key: token
@@ -23,7 +23,7 @@ spec:
     spec:
       project: default
       source:
-        repoURL: "https://github.com/sorakoro/pr-preview.git"
+        repoURL: "https://github.com/sorakoro/pull-request-generator-sample.git"
         targetRevision: "{{head_sha}}"
         path: k8s/overlays/pr-preview
         kustomize:
