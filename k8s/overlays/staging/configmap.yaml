@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: myapp-config
 data:
-  APP_ENV: "pr-9-test"
+  APP_ENV: "pr-10-test"
